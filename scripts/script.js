@@ -7,7 +7,7 @@ const statusParagraph = document.getElementById("status");
 // Event listener for the submit button to handle form submission
 submitButton.addEventListener("click", function(e) {
     e.preventDefault();
-    processForm(nameInput.value, ageInput.value, initProcess(nameInput.value));
+    processForm(nameInput.value, ageInput.value, initProcess);
 
 });
 
@@ -15,17 +15,18 @@ submitButton.addEventListener("click", function(e) {
 function processForm(name, age, callback) {
     if ((name.trim() === "") || (age === "") ){
         statusParagraph.innerText = "Invalid information";
+        return;
     }
-        else {
-            nameInput.value = "";
-            ageInput.value = "";
-            callback()
-            .then(function() {
-                console.log("processed information successfully");
-            }).catch((err) => {
-                console.error("error processing information: " + err);
-            });
-        }
+    else {
+        nameInput.value = "";
+        ageInput.value = "";
+        callback(name)
+        .then(function() {
+            console.log("processed information successfully");
+        }).catch((err) => {
+            console.error("error processing information: " + err);
+        });
+    }
 };
 
 // Simulate an asynchronous operation to validate the age

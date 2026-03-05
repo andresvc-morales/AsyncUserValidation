@@ -5,12 +5,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     </head>
     <body>
         <div id="main_container">
             <form action="clear">
                 <input id="name" type="text" placeholder="Name" required>
-                <input id="age" type="number" placeholder="Age" required>
+                <input id="age" type="number" min="0" max="100" placeholder="Age" required>
                 <p id="status"></p>
                 <button id="submit_button" type="button">Submit</button>
             </form>
