@@ -4,18 +4,25 @@ const nameInput = document.getElementById("name");
 const ageInput = document.getElementById("age");
 const statusParagraph = document.getElementById("status");
 
+// Event listener for the window load event to restart the form and hide the status message
+window.addEventListener('load', function() {
+    nameInput.value = '';
+    ageInput.value = '';
+    statusParagraph.style.display = 'none';
+});
+
 // Event listener for the submit button to handle form submission
 submitButton.addEventListener("click", function(e) {
     e.preventDefault();
-    processForm(nameInput.value, ageInput.value, initProcess);
+    processForm(nameInput.value, ageInput.value, initProcess(nameInput.value));
 
 });
 
 // Function to process the form data and handle the asynchronous operation
 function processForm(name, age, callback) {
-    if ((name.trim() === "") || (age === "") ){
+    if ((name.trim() === "") || (age.trim()=== "") ){
+        statusParagraph.style.display = "flex";
         statusParagraph.innerText = "Invalid information";
-        return;
     }
     else {
         nameInput.value = "";
@@ -44,6 +51,7 @@ async function validateAge(age) {
 
 // Initialize the process of validating the age and updating the status
 async function initProcess(userName) {
+    statusParagraph.style.display = "flex";
     statusParagraph.innerText = "Processing information...";
     try {
         const age = await validateAge(ageInput.value);
